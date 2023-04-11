@@ -1,0 +1,153 @@
+
+body {
+	height: 100vh;
+	margin: 0;
+	background: grey;
+    background-image: url('https://source.unsplash.com/random/?landscape');
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	/* font-size: 120%; */
+    font-family: 'Roboto Mono', monospace;
+}
+
+.container2 {
+	/* width: 100%; */
+	 max-width: 850px!important; 
+	padding: 2em;
+	margin: 20px;
+	border-radius: 30px;
+	background: #000000b6;
+	color:  white;
+}
+/* .app { */
+	/* display: flex; */
+/* } */
+.app.div {
+	padding: 10px;
+}
+/* .weather-details { */
+	/* width: 70%; */
+	/* padding: 0; */
+/* } */
+
+.weather-state {
+	display: flex;
+	align-items: center;
+	padding: 0;
+}
+.temperature {
+	margin: 0;
+}
+.search-bar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.search-input {
+	
+	width: calc(100% - 80px);
+	padding: 0.4em 1em;
+	border: none;
+	outline: none;
+	border-radius: 24px;
+	background: #7c7c7c2b;
+	color: white;
+	font-family: 'Roboto Mono', monospace;
+	font-size: 120%;
+	
+}
+.search-button {
+	height: 48px;
+	width: 48px;
+	margin: 0.5em;
+	border-radius: 50%;
+	border: none;
+	background: #7c7c7c2b;
+	color: white;
+	outline: none;
+	
+}
+
+button:hover {
+	background: #7c7c7c6b;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+}
+.location-name {
+	display: flex;
+	align-items: center;
+}
+.favorite-button{
+	margin: 0.5em;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	border: none;
+	background: #7c7c7c6b;
+	color: white;
+	outline: none;
+	
+}
+#favorite {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+
+.favorite-list {
+    /* width: 30%; */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 0.8em;
+	font-family: 'Playfair Display', serif;
+	
+}
+
+.loading {
+	visibility: hidden;
+	
+}
+
+.forecast-button {
+	margin: 10px 0;
+	font-size: 120%;
+}
+
+/* .forecast{ */
+	 /* display: flex!important;  */
+	/* padding: 0; */
+/* } */
+
+.day { 
+	 border: 1px solid grey; 
+	 padding: 5px; 
+	 text-align: center; 
+	 font-size: 80%; 
+	/* /* /COLAPSE*/ */ */
+} 
+ul {
+   margin:0;
+   padding: 0;
+   text-indent: 0;
+   list-style-type: none;
+}
+.fav-btn, .forecast-button {
+	background: none;
+	color: white;
+	border-radius: 12px;
+	font-size: 120%;
+	border: none;
+	outline: none;
+	margin: 5px 0 ;
+}
+
+/* @media screen and (min-width: 420px) { */
+  /* .day { */
+    /* display: block; */
+  /* } */
