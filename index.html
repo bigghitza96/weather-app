@@ -9,65 +9,68 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto+Mono&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<!-- Bootstrap library-->
-	<!-- API links-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	
 	</head>
 	
 	<body>
 	
 	<div class="container2">
+	<!--Search Bar -->			
 		<div class="search-bar">
-							<!--Search Bar -->
-						
-							<input class="search-input" type="text" placeholder="Search"/>
-							<!--Button  search-icon-->
-							<button class="search-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="search" width="1.5em" height="1.5em"><g data-name="Layer 2"><path d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z" data-name="search"></path></g></svg></button>
+							
+			<input class="search-input" type="text" placeholder="Search"/>
+			<!--Button  search-icon-->
+			<button class="search-button "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="search" width="1.5em" height="1.5em"><g data-name="Layer 2"><path d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z" data-name="search"></path></g></svg></button>
 						
 				
 		</div>
-		<div class="app loading">
-		<!-- Sectiune SearchBar si InfoView-->
-					
-		<div class="row">
-			<div class="col-md-6">
-				<div class="weather-details"><!-- Info View-->
-						<!--Nume oras -->
-					<div class="location-name"><h2 class="city">Weather in Focsani</h2>
-						<!--Add to favorite Button -->
-					<button class="favorite-button"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" id="favorite"><path d="M16,23.950931 L23.3243448,27.8015669 L21.9255194,19.6457891 L27.8510389,13.8698352 L19.6621724,12.6799232 L16,5.25955146 L12.3378276,12.6799232 L4.14896114,13.8698352 L10.0744806,19.6457891 L8.67565518,27.8015669 L16,23.950931 Z M9.60633744,29.5718298 C8.62864827,30.0858314 7.41939395,29.7099384 6.90539234,28.7322492 C6.7007142,28.3429282 6.63008485,27.8969921 6.70443854,27.4634768 L7.92551943,20.3440289 L2.75293776,15.3020079 C1.9619706,14.5310055 1.94578599,13.264779 2.71678842,12.4738118 C3.02380562,12.1588445 3.42609045,11.9538702 3.86136451,11.8906212 L11.0096966,10.8519077 L14.2065278,4.37442004 C14.6953724,3.38391272 15.8946241,2.97723472 16.8851314,3.46607931 C17.2795566,3.66073979 17.5988117,3.97999483 17.7934722,4.37442004 L20.9903034,10.8519077 L28.1386355,11.8906212 C29.2317252,12.0494564 29.9890881,13.0643421 29.8302529,14.1574318 C29.7670039,14.5927059 29.5620295,14.9949907 29.2470622,15.3020079 L24.0744806,20.3440289 L25.2955615,27.4634768 C25.4822835,28.5521497 24.7511078,29.5860616 23.6624349,29.7727836 C23.2289197,29.8471373 22.7829835,29.7765079 22.3936626,29.5718298 L16,26.2104824 L9.60633744,29.5718298 Z"></path></svg></button>
+		<!--InfoView-->
+		<div class="app loading">	
+			<div class="row">
+				<div class="col-md-6">
+					<div class="weather-details"><!-- Info View-->
+							<!--Nume oras -->
+						<div class="location-name">
+						
+							<h2 class="city">Weather in Focsani</h2><button class="favorite-button"> + </button>
+							<!--Add to favorite Button -->
+						
 						</div>
-						<!--Info-->
-					<h1 class="temperature"> 10°C</h1>
-					<div class="weather-state">
-					<div class="description"> Broken clouds</div>
-					<img class="icon" src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="weather state icon"/>
-					
+							<!--Info-->
+						<h1 class="temperature"> 10°C</h1>
+						<div class="weather-state">
+							<div class="description"> Broken clouds</div>
+							<img class="icon" src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="weather state icon"/>
+						
+						</div>
+						<div class="humidity"> Humidity: 60% </div>
+						<div class="wind-speed"> Wind: 20 km/k </div>	
 					</div>
-					<div class="humidity"> Humidity: 60% </div>
-					<div class="wind-speed"> Wind: 20 km/k </div>	
-			</div>
-			
-			</div>	
-			<div class="col">
-				<div class="favorite-list"><!-- Sectiune Favorite locations -->
-			
-				<h2 class="">Favorite locations</h2>
-				<ul class="list">
+				
+				</div>	
+				<!-- Sectiune Favorite locations -->
+				<div class="col">
+					<div class="favorite-list">
+				
+						<h2 class="fav-list">Favorite locations</h2>
+						<ul class="list">
 
-				</ul>
-			
-			
-				</div>
-			</div>	
-		</div>		
+						</ul>
+				
+				
+					</div>
+				</div>	
+			</div>		
 			
 		</div>
-		<button class="forecast-button">Forecast</button>
+		<button class="forecast-button ">Forecast</button>
 		<div class="container">
 			<div class="forecast row">
-				
+					
 			</div>
-		<div>
+				
+				
 		</div>
 		
 	<script src="script.js"></script>
