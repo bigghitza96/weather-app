@@ -1,5 +1,5 @@
 
-//START FAVORITE SECTION
+
 
 let favouriteList = "";
 let favoriteCount = 1;
@@ -7,22 +7,25 @@ let favoriteCondition = false;
 let currentLocation =" "; 
 let weatherInfo = document.querySelector(".weather-details");
 let favouriteListElements = document.querySelector(".favorite-list");
+let searchBarInputElement = document.querySelector(".search-bar");
 let deleteButtons = "";
 let forecast = "";
-// END FAVORITE SECTION
+let forecastCondition = true;
 function getInitialForecastUrl(city){
 	const url = new URL("https://api.weatherapi.com/v1/current.json");
 	url.searchParams.append("key", "7cf456bb49b0445f956112335230704");
 	url.searchParams.append("q", city);
 	return url;
 }
+
 let	weather = {
    
    apiKey: "7cf456bb49b0445f956112335230704",
    
    //WEATHER API DATA REQUEST
    fetchWeatherDetails: function(city) {
-       fetch( getInitialForecastUrl(city)).then((response) => response.json())
+      
+	   fetch( getInitialForecastUrl(city)).then((response) => response.json())
        .then((data) => this.displayWeather(data));
    },
    
@@ -38,14 +41,16 @@ let	weather = {
        document.querySelector('.wind-speed').innerText = `Wind speed: ${wind_kph} km/h`;
        document.querySelector('.app').classList.remove('loading');
        
-       currentLocation = name; // FAVORITE BUTTON ENTRY DATA.
+       currentLocation = name; 
        
        
    },
    
    search: function () {
-       this.fetchWeatherDetails(document.querySelector(".search-input").value);
+	
+			this.fetchWeatherDetails(document.querySelector(".search-input").value);
    },
+   
    //INITIAL LOCATION GET FUNCTION
    initial : {
            //GEO-LOCATION API DATA REQUEST
@@ -58,10 +63,8 @@ let	weather = {
            sendCity: function(data) {
             const {city} = data;
 			currentLocation = city;
-           weather.fetchWeatherDetails(city);
-           forecast.search(city);
-           forecastCondition = true; // VALUE AFTER INITIAL FORECAST.
-
+			weather.fetchWeatherDetails(city);
+			forecast.search(city);
             document.querySelector('.forecast').innerHTML = "";
            }
    
@@ -71,8 +74,9 @@ let	weather = {
 
 weather.initial.geoLocation();
 
+// FAVORITE LIST AND LOCAL STORAGE SECTION
 function initFavouriteList(){
-
+	
 	favouriteList = JSON.parse(localStorage.getItem('data'));
 	if(favouriteList == null){
 		localStorage.setItem('data', '[ ]');
@@ -80,21 +84,38 @@ function initFavouriteList(){
 		retrun;
 	}
 	favouriteList.forEach((item)=>{
-		favouriteListElements.querySelector(".list").innerHTML +=`<li class="favorite-city added" id="${item}"><button class="fav-btn">${item}</button><button class="delete-favourite">sterge</button></li>`;
+		favouriteListElements.querySelector(".list").innerHTML +=`<li class="favorite-city added" id="${item}"><button class="fav-btn ">${item}</button><button class="delete-favourite"> - </button></li>`;
 	})
-		
+
+}
+
+function initWeatherFromFavoriteList(){
+	favoriteButtons = favouriteListElements.querySelectorAll(".fav-btn");
+	favoriteButtons.forEach(button =>{
+		button.addEventListener("click", (event) => { 
+			const id = event.target.parentElement.id;
+			weather.fetchWeatherDetails(id);
+			
+			currentLocation = id;
+			forecastCondition = false;
+			initForecast();
+			forecast.search();
+			});
+	});
 }
 
 function initDeleteButtons(){
 	deleteButtons = favouriteListElements.querySelectorAll(".delete-favourite");
 	deleteButtons.forEach(button =>{
-		button.addEventListener("click", (event) => { //rename sa fie mai sugestiv la calsa delete-fav..
+		button.addEventListener("click", (event) => { 
 			const id = event.target.parentElement.id;
 			deleteFromStoarage(id);
 			event.target.parentElement.remove();
 			});
 	});
 }
+
+
 
 function saveLocal(){
 	if(favouriteList.length >= 5)
@@ -108,8 +129,10 @@ function saveLocal(){
 	}
     favouriteList.push(currentLocation);
     localStorage.setItem('data', JSON.stringify(favouriteList));
-	favouriteListElements.querySelector(".list").innerHTML +=`<li class="favorite-city added" id="${currentLocation}"><button class="fav-btn">${currentLocation}</button><button class="delete-favourite">sterge</button></li>`;
+	favouriteListElements.querySelector(".list").innerHTML +=`<li class="favorite-city added" id="${currentLocation}"><button class="fav-btn">${currentLocation}</button><button class="delete-favourite">-</button></li>`;
 	initDeleteButtons();
+	initWeatherFromFavoriteList();
+	
 }
 
 function deleteFromStoarage(id){
@@ -123,13 +146,14 @@ function deleteFromStoarage(id){
 	localStorage.setItem('data', JSON.stringify(favouriteList));
 }  
 
-function initForecast(){
+function initForecast(newCity){
 	const url = new URL("https://api.weatherapi.com/v1/forecast.json");
 	url.searchParams.append("key", "7cf456bb49b0445f956112335230704");
-	url.searchParams.append("q", currentLocation);
+	url.searchParams.append("q", newCity != null ? newCity : currentLocation);
 	url.searchParams.append("days", 7);
-
+	
 	forecast = {
+		 
        forecastFetch: function(city) {
            fetch(url).then((response) => response.json())
            .then((data) => this.displayForecast(data));
@@ -151,49 +175,52 @@ function initForecast(){
        },
        
        search: function () {
-           this.forecastFetch(document.querySelector(".search-input").value);
+		  document.querySelector('.forecast').innerHTML = " ";
+		  this.forecastFetch(document.querySelector(".search-input").value);
+		  
        }
 
 	}
 }    
+// END FAVORITE LIST AND LOCAL STORAGE SECTION
 
-document.querySelector(".search-button").addEventListener("click", function() {
+searchBarInputElement.querySelector(".search-button").addEventListener("click", function() {
     weather.search(); 
     document.querySelector('.forecast').innerHTML = "";
+	
 });
 
-document.querySelector('.search-input').addEventListener("keyup", function(event) {
+searchBarInputElement.querySelector('.search-input').addEventListener("keyup", function(event) {
     if(event.key == "Enter") {
         weather.search();
         document.querySelector('.forecast').innerHTML = "";
+		
     }
 });
 
-weatherInfo.querySelector('.favorite-button').addEventListener("click", () => {	//rename la favourite-button cu add-favourite-button
-	 saveLocal()
+weatherInfo.querySelector('.favorite-button').addEventListener("click", () => {	
+	 saveLocal();
 });
 
 
-// ADD TO FAVORITE SECTION.
+
 
 
 
 initFavouriteList();    
 initDeleteButtons();
+initWeatherFromFavoriteList();
 
 
 
-// FORECAST SECTION.
-
-
-let forecastCondition = true;
 document.querySelector(".forecast-button").addEventListener("click", function() {
-   initForecast();
-   if(forecastCondition) {
+		initForecast();
+    if(forecastCondition) {
        forecast.search();
        forecastCondition = false;
    } else {
        document.querySelector('.forecast').innerHTML = " ";
-       forecastCondition = true;
-   }
+        forecastCondition = true;
+  }
+   
 });
